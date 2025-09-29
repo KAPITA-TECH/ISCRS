@@ -67,8 +67,8 @@ const InternationalSpeakers = () => {
       <section className="pt-16 pb-16 lg:pt-20 lg:pb-24 bg-white">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Title */}
-          <div className="text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#38738a] relative inline-block">
+          <div className="flex justify-center w-full">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#38738a] text-center">
               INTERNATIONAL SPEAKERS
             </h2>
           </div>
@@ -78,30 +78,31 @@ const InternationalSpeakers = () => {
 
         {/* Speakers Carousel */}
         <div className="relative w-full">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
-            aria-label="Previous speakers"
-          >
-            <svg className="w-6 h-6 text-[#38738a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
-            aria-label="Next speakers"
-          >
-            <svg className="w-6 h-6 text-[#38738a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
           {/* Speakers Grid */}
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 max-w-5xl mx-auto">
+            <div className="relative max-w-5xl mx-auto">
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute -left-16 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+                aria-label="Previous speakers"
+              >
+                <svg className="w-6 h-6 text-[#38738a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <button
+                onClick={nextSlide}
+                className="absolute -right-16 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+                aria-label="Next speakers"
+              >
+                <svg className="w-6 h-6 text-[#38738a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16">
               {getCurrentSpeakers().map((speaker) => (
               <div key={speaker.id} className="text-center group">
                 {/* Speaker Image with Patterned Background */}
@@ -145,6 +146,7 @@ const InternationalSpeakers = () => {
                 </p>
               </div>
               ))}
+              </div>
             </div>
           </div>
 

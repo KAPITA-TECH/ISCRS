@@ -44,17 +44,16 @@ const Hero = () => {
         </p>
 
         {/* Event Date and Location */}
-        <div className="text-lg sm:text-xl lg:text-2xl text-[#1d5875] font-semibold mb-16">
+        <div className="text-lg sm:text-xl lg:text-2xl text-[#1d5875] font-semibold mb-8">
           Jan 22-23, 2026 - Mövenpick Hotel, Baghdad
         </div>
-        <br />
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center pt-8 mb-16">
-          <button className="bg-[#94573d] text-white px-16 py-8 text-lg font-semibold rounded-md hover:bg-[#7d4832] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 min-w-[160px] min-h-[35px]">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center mb-16">
+          <button className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
             Register
           </button>
-          <button className="bg-[#94573d] text-white px-16 py-8 text-lg font-semibold rounded-md hover:bg-[#7d4832] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 min-w-[160px] min-h-[35px]">
+          <button className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
             Sponsor
           </button>
         </div>
