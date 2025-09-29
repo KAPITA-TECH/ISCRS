@@ -10,13 +10,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-omar:#8f5339;
+  --color-primary:#91553c;
+  --color-secondary:#38738c;
+  --color-buttons:#7a4027;
+
+
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+
 
 html {
   scroll-behavior: smooth;

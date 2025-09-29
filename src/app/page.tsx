@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import InternationalSpeakers from '@/components/InternationalSpeakers';
+import AboutISCRS from '@/components/AboutISCRS';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Header />
       <Hero />
       <InternationalSpeakers />
+      <AboutISCRS />
     </main>
   );
 }
