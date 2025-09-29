@@ -32,7 +32,7 @@ const Header = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-2 lg:py-3">
+        <div className="flex items-center justify-between py-1 lg:py-1.5">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
             <Image
@@ -40,7 +40,7 @@ const Header = () => {
               alt="ISCRS Logo"
               width={320}
               height={160}
-              className="h-16 lg:h-20 xl:h-24 w-auto transition-all duration-300 hover:scale-105"
+              className="h-16 lg:h-18 xl:h-20 w-auto transition-all duration-300 hover:scale-105"
               priority
             />
           </div>
