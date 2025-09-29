@@ -62,13 +62,13 @@ const InternationalSpeakers = () => {
   return (
     <>
       {/* White space gap */}
-      <div className="h-24 lg:h-32 bg-white"></div>
+      <div className="h-6 lg:h-8 bg-white"></div>
       
-      <section className="pt-16 pb-16 lg:pt-20 lg:pb-24 bg-white">
+      <section className="pt-4 pb-16 lg:pt-6 lg:pb-24 bg-white">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Title */}
           <div className="flex justify-center w-full">
-            <h2 className="text-3xl lg:text-4xl font-bold text-[#38738a] text-center">
+            <h2 className="text-3xl lg:text-4xl font-medium text-[#38738a] text-center">
               INTERNATIONAL SPEAKERS
             </h2>
           </div>

@@ -28,9 +28,9 @@ const AboutISCRS = () => {
   return (
     <>
       {/* White space gap */}
-      <div className="h-24 lg:h-32 bg-white"></div>
+      <div className="h-6 lg:h-8 bg-white"></div>
       
-      <section className="pt-16 pb-16 lg:pt-20 lg:pb-24 bg-white">
+      <section className="pt-4 pb-16 lg:pt-6 lg:pb-24 bg-white">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Title */}
           <div className="text-center mb-8">
@@ -44,8 +44,7 @@ const AboutISCRS = () => {
             </h3>
             
             {/* Description */}
-            <p className="text-sm lg:text-base font-light text-[#8f523c] tracking-wider" 
-               style={{ fontVariant: 'small-caps' }}>
+            <p className="text-lg lg:text-xl font-light text-[#8f523c] tracking-wider">
               advancing surgical skills, innovation, and continuous education in ophthalmology
             </p>
           </div>
@@ -62,13 +61,15 @@ const AboutISCRS = () => {
                 className="bg-gradient-to-br  from-omar  to-[#662f17] rounded-2xl  shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 min-h-[320px] lg:min-h-[350px] flex flex-col"
               >
                 {/* Card Title */}
-                <h4 className="text-xl lg:text-2xl font-semibold text-white text-left pt-6 mb-4 px-8 lg:px-10">
-                  {card.title}
-                </h4>
+                <div className="h-20 flex items-start">
+                  <h4 className="text-xl lg:text-2xl font-semibold text-white text-left pt-6 px-8 lg:px-10">
+                    {card.title}
+                  </h4>
+                </div>
                 
                 {/* Card Description */}
-                <div className="flex-grow flex items-center">
-                  <p className="text-white/90 leading-relaxed text-base lg:text-lg font-light px-8 lg:px-10 py-5 text-left">
+                <div className="flex-grow px-8 lg:px-10 pb-6">
+                  <p className="text-white/90 leading-relaxed text-base lg:text-lg font-light text-left">
                     {card.description}
                   </p>
                 </div>

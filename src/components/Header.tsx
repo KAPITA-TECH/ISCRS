@@ -32,14 +32,14 @@ const Header = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-3 lg:py-4">
+        <div className="flex items-center justify-between py-2 lg:py-3">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center ml-8 lg:ml-16 xl:ml-20">
+          <div className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
             <Image
               src="/images/ISCRS_Logo_page-0001-removebg-preview.png"
               alt="ISCRS Logo"
-              width={280}
-              height={140}
+              width={320}
+              height={160}
               className="h-16 lg:h-20 xl:h-24 w-auto transition-all duration-300 hover:scale-105"
               priority
             />
@@ -62,7 +62,7 @@ const Header = () => {
 
           {/* Register Button - Right Side */}
           <div className="hidden md:flex items-center">
-            <button className="bg-[#38738c] text-white px-12 py-10 text-lg font-bold rounded-lg hover:bg-[#37718a] transition-all duration-200 shadow-lg hover:shadow-xl min-w-[120px] min-h-[45px]">
+            <button className="bg-[#38738c] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#2d5a6b] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
               Register
             </button>
           </div>
