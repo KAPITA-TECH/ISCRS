@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Set the workspace root to avoid lockfile warnings
+  turbopack: {
+    root: __dirname,
+  },
   // Disable caching for development
   experimental: {
     staleTimes: {
@@ -15,7 +19,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   // Disable build cache
-
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
 };
 
 export default nextConfig;
