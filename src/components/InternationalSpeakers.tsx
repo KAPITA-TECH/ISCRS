@@ -109,18 +109,14 @@ const InternationalSpeakers = () => {
                 <div className="relative mb-8">
                   {/* Patterned Background Circle */}
                   <div className="w-64 h-64 mx-auto rounded-full relative overflow-hidden">
-                    {/* Geometric Pattern Background */}
+                    {/* Pattern Image Background */}
                     <div 
                       className="absolute inset-0 rounded-full"
                       style={{
-                        backgroundImage: `
-                          linear-gradient(45deg, #38738a 25%, transparent 25%), 
-                          linear-gradient(-45deg, #38738a 25%, transparent 25%), 
-                          linear-gradient(45deg, transparent 75%, #94573d 75%), 
-                          linear-gradient(-45deg, transparent 75%, #94573d 75%)
-                        `,
-                        backgroundSize: '20px 20px',
-                        backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+                        backgroundImage: 'url(/images/pattern.png)',
+                        backgroundRepeat: 'repeat',
+                        backgroundPosition: 'center',
+                        backgroundSize: '100px 100px'
                       }}
                     />
                     

@@ -69,19 +69,15 @@ const ExcellenceInOphthalmology = () => {
                   </div>
                 </div>
 
-                {/* Patterned Horizontal Divider */}
+                {/* Patterned Horizontal Divider - using pattern image */}
                 <div className="mt-auto -mx-6 mb-2">
                   <div 
-                    className="h-3 w-full bg-white"
+                    className="h-4 w-full"
                     style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, #38738a 25%, transparent 25%), 
-                        linear-gradient(-45deg, #38738a 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #94573d 75%), 
-                        linear-gradient(-45deg, transparent 75%, #94573d 75%)
-                      `,
-                      backgroundSize: '12px 12px',
-                      backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0px'
+                      backgroundImage: 'url(/images/pattern.png)',
+                      backgroundRepeat: 'repeat-x',
+                      backgroundPosition: 'center',
+                      backgroundSize: '100px 100px'
                     }}
                   ></div>
                 </div>
