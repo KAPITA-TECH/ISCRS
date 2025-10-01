@@ -65,7 +65,7 @@ const Header = () => {
                     href={link.href}
                     className={`font-medium transition-colors duration-200 whitespace-nowrap py-2 px-4 rounded-md ${
                       isContactPage
-                        ? "text-gray-700 hover:text-white hover:bg-[#38738c]"
+                        ? "text-gray-700 hover:text-white hover:bg-[#8B4513]"
                         : "text-[#3d657a] hover:text-white hover:bg-[#94563b]"
                     }`}
                   >
@@ -77,7 +77,7 @@ const Header = () => {
                     href={link.href}
                     className={`font-medium transition-colors duration-200 whitespace-nowrap py-2 px-4 rounded-md ${
                       isContactPage
-                        ? "text-gray-700 hover:text-white hover:bg-[#38738c]"
+                        ? "text-gray-700 hover:text-white hover:bg-[#8B4513]"
                         : "text-[#3d657a] hover:text-white hover:bg-[#94563b]"
                     }`}
                   >
