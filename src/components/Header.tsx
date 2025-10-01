@@ -32,10 +32,10 @@ const THEME = {
 
 const navigationLinks: NavigationLink[] = [
 	{ name: "About", href: "/about" },
-	{ name: "Program", href: "#program" },
-	{ name: "Speakers", href: "#speakers" },
-	{ name: "Registration", href: "#registration" },
-	{ name: "Sponsorship", href: "#sponsorship" },
+	{ name: "Program", href: "/program" },
+	{ name: "Speakers", href: "/speakers" },
+	{ name: "Registration", href: "/registration" },
+	{ name: "Sponsorship", href: "/sponsorship" },
 	{ name: "Contact", href: "/contact" },
 ];
 
