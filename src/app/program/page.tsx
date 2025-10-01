@@ -21,7 +21,7 @@ export default function ProgramPage() {
       {/* Placeholder Content */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-500 text-base lg:text-lg">program content will be added soon.</p>
+          <p className="text-gray-500 text-base lg:text-lg">Program content will be added soon.</p>
         </div>
       </section>
     </main>
