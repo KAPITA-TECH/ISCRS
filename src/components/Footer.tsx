@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#38738c] text-white">
+    <footer className="bg-white text-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* ISCRS Logo and Description */}
@@ -17,7 +17,7 @@ const Footer = () => {
                 className="h-16 w-auto object-contain"
               />
             </div>
-            <p className="text-white/90 text-sm leading-relaxed">
+            <p className="text-gray-600 text-sm leading-relaxed">
               Iraqi Society of Cataract & Refractive Surgeons - Advancing
               surgical skills, innovation, and continuous education.
             </p>
@@ -25,14 +25,14 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900">
               Quick Links
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="#about"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   About Us
                 </Link>
@@ -40,7 +40,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#committee"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   Committee
                 </Link>
@@ -48,7 +48,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#publications"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   Publications
                 </Link>
@@ -56,7 +56,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#news"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   News
                 </Link>
@@ -66,14 +66,14 @@ const Footer = () => {
 
           {/* MOCAT Events */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900">
               MOCAT Events
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="#mocat1"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   MOCAT 1
                 </Link>
@@ -81,7 +81,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#mocat2"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   MOCAT 2
                 </Link>
@@ -89,7 +89,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#mocat3"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   MOCAT 3
                 </Link>
@@ -97,7 +97,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#mocat4"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   MOCAT 4
                 </Link>
@@ -105,7 +105,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#mocat5"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   MOCAT 5
                 </Link>
@@ -115,7 +115,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900">
               Contact Info
             </h3>
             <div className="space-y-3">
@@ -135,7 +135,7 @@ const Footer = () => {
                 </svg>
                 <a
                   href="mailto:info@mocatiscrs.org"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   info@mocatiscrs.org
                 </a>
@@ -143,9 +143,9 @@ const Footer = () => {
 
               <div className="flex items-start space-x-3">
                 <svg
-                  className="w-5 h-5 text-[#38738c] mt-0.5 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-900 mt-0.5 flex-shrink-0"
+                  fill="white"
+                  stroke="white"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -157,7 +157,7 @@ const Footer = () => {
                 </svg>
                 <a
                   href="tel:+9647700007770"
-                  className="text-white/80 hover:text-white transition-colors duration-200"
+                  className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                 >
                   +9647700007770
                 </a>
@@ -165,9 +165,9 @@ const Footer = () => {
 
               <div className="flex items-start space-x-3">
                 <svg
-                  className="w-5 h-5 text-[#38738c] mt-0.5 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-900 mt-0.5 flex-shrink-0"
+                  fill="white"
+                  stroke="white"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -183,15 +183,15 @@ const Footer = () => {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <span className="text-white/80">Baghdad, Iraq</span>
+                <span className="text-gray-700">Baghdad, Iraq</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Border */}
-        <div className="border-t border-white/20 mt-8 pt-8">
-          <div className="text-center text-white/70 text-sm">
+        <div className="border-t border-gray-300 mt-8 pt-8">
+          <div className="text-center text-gray-500 text-sm">
             <p>
               &copy; 2024 Iraqi Society of Cataract & Refractive Surgeons. All
               rights reserved.
