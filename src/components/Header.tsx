@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,24 +20,26 @@ const Header = () => {
   }, []);
 
   const navigationLinks = [
-    { name: "About", href: "#about" },
-    { name: "Program", href: "#program" },
-    { name: "Speakers", href: "#speakers" },
+    { name: "About", href: "/about" },
+    { name: "Program", href: "/program" },
+    { name: "Speakers", href: "/speakers" },
     { name: "Registration", href: "#registration" },
     { name: "Sponsorship", href: "#sponsorship" },
     { name: "Contact", href: "#contact" },
   ];
 
+  const showWhiteHeader = !isScrolled && (pathname === "/speakers" || pathname === "/program");
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-        isScrolled ? "backdrop-blur-lg shadow-lg" : ""
+        isScrolled ? "backdrop-blur-lg shadow-lg" : showWhiteHeader ? "bg-white" : ""
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-1 lg:py-1.5">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
+          <Link href="/" className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
             <Image
               src="/images/ISCRS_Logo_page-0001-removebg-preview.png"
               alt="ISCRS Logo"
@@ -43,7 +48,7 @@ const Header = () => {
               className="h-16 lg:h-18 xl:h-20 w-auto transition-all duration-300 hover:scale-105"
               priority
             />
-          </div>
+          </Link>
 
           {/* Desktop Navigation - Centered */}
           <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2">

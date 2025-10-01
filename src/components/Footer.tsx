@@ -9,7 +9,9 @@ const Footer = () => {
           {/* Left: Logo + Socials */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <Image src="/images/ISCRS_Logo_page-0001-removebg-preview.png" alt="ISCRS" width={112} height={112} />
+              <Link href="/" aria-label="Go to homepage" className="flex items-center">
+                <Image src="/images/ISCRS_Logo_page-0001-removebg-preview.png" alt="ISCRS" width={112} height={112} />
+              </Link>
               <div className="text-[#38738c] font-semibold text-lg">ISCRS</div>
             </div>
             <div className="text-sm text-gray-600 mb-4">Iraqi Society of Cataract and Refractive Surgery</div>
@@ -25,12 +27,12 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="text-[#38738c] font-semibold mb-4">Quick Links</div>
             <ul className="space-y-2 text-sm text-gray-700">
-              <li><Link href="#" className="hover:text-[#1d5875]">About</Link></li>
-              <li><Link href="#" className="hover:text-[#1d5875]">Program</Link></li>
-              <li><Link href="#" className="hover:text-[#1d5875]">Speakers</Link></li>
-              <li><Link href="#" className="hover:text-[#1d5875]">Registration</Link></li>
-              <li><Link href="#" className="hover:text-[#1d5875]">Sponsorship</Link></li>
-              <li><Link href="#" className="hover:text-[#1d5875]">Contact</Link></li>
+              <li><Link href="/about" className="hover:text-[#1d5875]">About</Link></li>
+              <li><Link href="/program" className="hover:text-[#1d5875]">Program</Link></li>
+              <li><Link href="#speakers" className="hover:text-[#1d5875]">Speakers</Link></li>
+              <li><Link href="#registration" className="hover:text-[#1d5875]">Registration</Link></li>
+              <li><Link href="#sponsorship" className="hover:text-[#1d5875]">Sponsorship</Link></li>
+              <li><Link href="#contact" className="hover:text-[#1d5875]">Contact</Link></li>
             </ul>
           </div>
 
