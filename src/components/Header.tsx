@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,18 +19,20 @@ const Header = () => {
   }, []);
 
   const navigationLinks = [
-    { name: "About", href: "#about" },
-    { name: "Program", href: "#program" },
+    { name: "About", href: "/about" },
+    { name: "Program", href: "/program" },
     { name: "Speakers", href: "#speakers" },
     { name: "Registration", href: "#registration" },
     { name: "Sponsorship", href: "#sponsorship" },
     { name: "Contact", href: "#contact" },
   ];
 
+  const isProgramPage = pathname === "/program";
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-        isScrolled ? "backdrop-blur-lg shadow-lg" : ""
+        isScrolled ? "backdrop-blur-lg shadow-lg" : isProgramPage ? "bg-white" : ""
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
