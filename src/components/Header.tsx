@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +20,7 @@ const Header = () => {
   }, []);
 
   const navigationLinks = [
-    { name: "About", href: "#about" },
+    { name: "About", href: "/about" },
     { name: "Program", href: "#program" },
     { name: "Speakers", href: "#speakers" },
     { name: "Registration", href: "#registration" },
@@ -25,16 +28,18 @@ const Header = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const isAboutPage = pathname === "/about";
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-        isScrolled ? "backdrop-blur-lg shadow-lg" : ""
+        isAboutPage || isScrolled ? "bg-white shadow-lg" : "backdrop-blur-lg"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-1 lg:py-1.5">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
+          <Link href="/" className="flex-shrink-0 flex items-center ml-4 lg:ml-8 xl:ml-12">
             <Image
               src="/images/ISCRS_Logo_page-0001-removebg-preview.png"
               alt="ISCRS Logo"
@@ -43,19 +48,29 @@ const Header = () => {
               className="h-16 lg:h-18 xl:h-20 w-auto transition-all duration-300 hover:scale-105"
               priority
             />
-          </div>
+          </Link>
 
           {/* Desktop Navigation - Centered */}
           <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2">
             <div className="flex items-center gap-8">
               {navigationLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-[#3d657a] hover:text-white font-medium transition-colors duration-200 whitespace-nowrap py-2 px-4 rounded-md hover:bg-[#94563b]"
-                >
-                  {link.name}
-                </a>
+                link.href.startsWith('#') ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-[#3d657a] hover:text-white font-medium transition-colors duration-200 whitespace-nowrap py-2 px-4 rounded-md hover:bg-[#94563b]"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-[#3d657a] hover:text-white font-medium transition-colors duration-200 whitespace-nowrap py-2 px-4 rounded-md hover:bg-[#94563b]"
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
             </div>
           </nav>
@@ -98,14 +113,25 @@ const Header = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 backdrop-blur-lg rounded-lg mt-2 shadow-lg">
               {navigationLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block px-3 py-2 text-[#3d657a] hover:text-[#37718a] font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
+                link.href.startsWith('#') ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block px-3 py-2 text-[#3d657a] hover:text-[#37718a] font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block px-3 py-2 text-[#3d657a] hover:text-[#37718a] font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <button className="w-full mt-4 bg-[#38738c] text-white px-6 py-2 rounded-md hover:bg-[#37718a] transition-colors duration-200 font-medium">
                 Register
