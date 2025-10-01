@@ -88,7 +88,6 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Register Button - Right Side */}
           <div className="hidden md:flex items-center">
             <button className="bg-[#38738c] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#2d5a6b] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
               Register
