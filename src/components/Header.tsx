@@ -11,7 +11,7 @@ const navigationLinks = [
   { name: "Speakers", href: "#speakers" },
   { name: "Registration", href: "#registration" },
   { name: "Sponsorship", href: "#sponsorship" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const Header = () => {
