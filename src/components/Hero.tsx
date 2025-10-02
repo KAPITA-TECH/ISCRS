@@ -1,12 +1,13 @@
+import React from 'react';
 import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 lg:pt-20">
+    <section className="relative min-h-screen overflow-hidden pt-20" style={{ minHeight: '150vh' }}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-background.png"
+          src="/images/background.png"
           alt="Hero Background"
           fill
           className="object-cover"
@@ -18,14 +19,26 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* MOCAT5 Image */}
+        {/* Vector Image */}
         <div className="mb-8 flex justify-center">
           <Image
-            src="/images/mocat5.png"
-            alt="MOCAT5"
+            src="/vector.svg"
+            alt="Vector Icon"
             width={800}
             height={400}
-            className="h-56 lg:h-64 w-auto"
+            className="h-32 lg:h-40 w-auto"
+            priority
+          />
+        </div>
+
+        {/* MOCAT Full Format Image */}
+        <div className="mb-6 flex justify-center">
+          <Image
+            src="/images/MOCAT Full Format.svg"
+            alt="MOCAT Full Format"
+            width={600}
+            height={200}
+            className="h-12 lg:h-16 w-auto"
             priority
           />
         </div>
