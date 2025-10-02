@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface ScheduleItem {
   id: number;
@@ -163,22 +164,24 @@ const ProgramPreview = () => {
 
           {/* View Full Program Button */}
           <div className="flex justify-center mt-8 lg:mt-12">
-            <button
-              className="bg-gradient-to-r from-[#38738a] to-[#2d5f6f] text-white px-10 py-4 lg:px-12 lg:py-5 rounded-3xl font-bold text-sm lg:text-base hover:from-[#2d5f6f] hover:to-[#1e4d5b] transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-[0_20px_40px_rgba(56,115,138,0.4)] border border-white/10 relative overflow-hidden group"
-              style={{
-                boxShadow: `
-                  0 15px 30px rgba(56,115,138,0.3),
-                  inset 0 1px 0 rgba(255,255,255,0.2),
-                  inset 0 -1px 0 rgba(0,0,0,0.1)
-                `,
-              }}
-            >
-              <span className="relative z-10 drop-shadow-sm">
-                View Full Program
-              </span>
-              {/* Button shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12"></div>
-            </button>
+            <Link href="/program">
+              <button
+                className="bg-gradient-to-r from-[#38738a] to-[#2d5f6f] text-white px-10 py-4 lg:px-12 lg:py-5 rounded-3xl font-bold text-sm lg:text-base hover:from-[#2d5f6f] hover:to-[#1e4d5b] transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-[0_20px_40px_rgba(56,115,138,0.4)] border border-white/10 relative overflow-hidden group"
+                style={{
+                  boxShadow: `
+                    0 15px 30px rgba(56,115,138,0.3),
+                    inset 0 1px 0 rgba(255,255,255,0.2),
+                    inset 0 -1px 0 rgba(0,0,0,0.1)
+                  `,
+                }}
+              >
+                <span className="relative z-10 drop-shadow-sm">
+                  View Full Program
+                </span>
+                {/* Button shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12"></div>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
