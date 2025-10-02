@@ -13,9 +13,15 @@ export default function AbstractSubmission() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
             ISRC Abstract Submission
           </h1>
-          <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-8">
             Submit your abstract to be part of the ISRC.
           </p>
+          <Link
+            href="/abstract/submit"
+            className="inline-block bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-10 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:scale-105 transform transition-all duration-300"
+          >
+            Submit Your Abstract Here
+          </Link>
         </div>
       </section>
 
