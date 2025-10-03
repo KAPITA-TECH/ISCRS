@@ -30,13 +30,13 @@ const NAVIGATION_LINKS: NavigationLink[] = [
 		href: "#",
 		dropdown: [
 			{ name: "Program", href: "/program" },
-			{ name: "Membership", href: "/membership" },
 			{ name: "Abstract", href: "/abstract" },
 		],
 	},
 	{ name: "Speakers", href: "/speakers" },
 	{ name: "Committee", href: "/committee" },
 	{ name: "Sponsorship", href: "/sponsorship" },
+	{ name: "Membership", href: "/membership" },
 	{ name: "Contact", href: "/contact" },
 ] as const;
 
