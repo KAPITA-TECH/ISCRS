@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "../lib/utils";
+import RegisterButton from "./RegisterButton";
 
 interface DropdownItem {
 	name: string;
@@ -230,12 +231,7 @@ const Header = () => {
 								))}
 							</ul>
 							<div className="pt-3 border-t border-white/30">
-								<button
-									className="btn-primary w-full px-6 py-3 text-sm font-medium rounded-md"
-									onClick={closeMenu}
-								>
-									Register
-								</button>
+								<RegisterButton isMobile onClick={closeMenu} />
 							</div>
 						</div>
 					</div>
@@ -243,9 +239,7 @@ const Header = () => {
 			</header>
 
 			<div className="hidden md:block fixed top-8 right-4 lg:right-12 z-50">
-				<button className="btn-primary px-4 py-1 text-lg font-light rounded-md hover:-translate-y-1">
-					Register
-				</button>
+				<RegisterButton />
 			</div>
 		</>
 	);
