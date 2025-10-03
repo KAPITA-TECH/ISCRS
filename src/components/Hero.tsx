@@ -18,7 +18,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
         {/* Vector Image */}
         <div className="mb-8 flex justify-center">
           <Image
@@ -52,7 +52,7 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-base sm:text-lg lg:text-xl text-[#a3715d] mb-8 max-w-3xl mx-auto leading-relaxed">
-          Join us for the fifth of MOCAT, bringing together leading ophthalmologists, 
+          Join us for the fifth of MOCAT, bringing together leading ophthalmologists,
           surgeons, and eye care professionals from Iraq and the region
         </p>
 
