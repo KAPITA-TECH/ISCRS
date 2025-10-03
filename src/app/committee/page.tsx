@@ -32,7 +32,7 @@ export default function CommitteePage() {
 						<p className="text-base lg:text-lg text-gray-600 leading-relaxed">
 							Our committees are specialized groups within the Iraqi Society of
 							Cataract and Refractive Surgeons responsible for guiding the
-							society's activities in key areas such as education, research,
+							societys activities in key areas such as education, research,
 							membership, ethics, young ophthalmologists, sustainability, and
 							scientific programs. Each committee is made up of experienced
 							professionals who collaborate to shape the strategic direction and

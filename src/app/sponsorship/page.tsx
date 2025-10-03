@@ -329,7 +329,7 @@ export default function SponsorshipPage() {
 					</h2>
 					<p className="text-base lg:text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
 						Contact our sponsorship team to discuss partnership opportunities
-						and create a customized package that meets your organization's
+						and create a customized package that meets your organization
 						goals.
 					</p>
 				</div>
