@@ -14,16 +14,15 @@ const AttendeeRegistrationForm = () => {
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
 			{/* Hero Section */}
-			<section className="relative bg-gradient-to-r from-[#38738c] to-[#94573d] text-white py-24 px-4 overflow-hidden">
-
+			<section className="relative bg-gradient-to-r from-[#8ccbe5] to-[#b56c4d] text-[#2e5e73] py-24 px-4 overflow-hidden">
 				<div className="max-w-4xl mx-auto text-center relative z-10">
 					<h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
 						MOCAT 5 Registration
 					</h1>
-					<h2 className="text-2xl md:text-3xl font-light mb-6 text-gray-100">
+					<h2 className="text-2xl md:text-3xl font-light mb-6 text-[#2e5e73]">
 						5th Mesopotamia Ophthalmology Conference for Advanced Techniques
 					</h2>
-					<p className="text-xl text-gray-200">
+					<p className="text-xl text-[#2e5e73]">
 						January 22–23, 2026 | Mövenpick Hotel, Baghdad
 					</p>
 				</div>

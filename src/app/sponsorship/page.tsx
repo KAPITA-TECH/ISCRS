@@ -10,12 +10,12 @@ export default function SponsorshipPage() {
 	return (
 		<main className="min-h-screen bg-white">
 			{/* Hero Section */}
-			<section className="bg-[#2e5e73] pt-32 pb-20 lg:pt-40 lg:pb-28">
+			<section className="bg-gradient-to-r from-[#8ccbe5] to-[#b56c4d] pt-32 pb-20 lg:pt-40 lg:pb-28">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2e5e73] mb-4">
 						Sponsorship
 					</h1>
-					<p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto">
+					<p className="text-base sm:text-lg lg:text-xl text-[#2e5e73] max-w-3xl mx-auto">
 						Partner with us to advance ophthalmic education and research
 					</p>
 				</div>
@@ -329,8 +329,7 @@ export default function SponsorshipPage() {
 					</h2>
 					<p className="text-base lg:text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
 						Contact our sponsorship team to discuss partnership opportunities
-						and create a customized package that meets your organization
-						goals.
+						and create a customized package that meets your organization goals.
 					</p>
 				</div>
 			</section>
