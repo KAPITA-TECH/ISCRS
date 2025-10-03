@@ -26,8 +26,10 @@ interface ScheduleData {
 	};
 }
 
+// Commented out schedule data - keeping for reference
+/*
 const scheduleData: ScheduleData = {
-	thursday: {
+	day1: {
 		"6:00 AM - 7:30 AM": { general: "Registration" },
 		"7:30 AM - 8:30 AM": { general: "Day 1 Breakfast" },
 		"9:30 AM - 10:30 AM": {
@@ -109,15 +111,12 @@ const scheduleData: ScheduleData = {
 			],
 		},
 	},
-	friday: {
+	day2: {
 		"8:00 AM - 9:00 AM": { general: "Day 2 Registration" },
 		"9:00 AM - 10:00 AM": { general: "Opening Ceremony" },
 	},
-	saturday: {
-		"8:00 AM - 9:00 AM": { general: "Final Day Registration" },
-		"9:00 AM - 10:00 AM": { general: "Keynote Address" },
-	},
 };
+*/
 
 const timeSlots = [
 	"6:00 AM - 7:30 AM",
@@ -142,7 +141,7 @@ const timeSlots = [
 const rooms = ["Room 1 Main Hall", "Room 2", "Room 3", "Room 4"];
 
 export default function ProgramPage() {
-	const [activeDay, setActiveDay] = useState("thursday");
+	const [activeDay, setActiveDay] = useState("day1");
 	const [searchOpen, setSearchOpen] = useState(false);
 	const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 	const [categoryFilter, setCategoryFilter] = useState("use browser");
@@ -156,9 +155,8 @@ export default function ProgramPage() {
 	});
 
 	const days = [
-		{ key: "thursday", label: "Thursday, December 4, 2025" },
-		{ key: "friday", label: "Friday, December 5, 2025" },
-		{ key: "saturday", label: "Saturday, December 6, 2025" },
+		{ key: "day1", label: "Thursday, January 22, 2026" },
+		{ key: "day2", label: "Friday, January 23, 2026" },
 	];
 
 	const handleCourseClick = (course: Course) => {
@@ -180,16 +178,6 @@ export default function ProgramPage() {
 		<main className="min-h-screen bg-gray-50">
 			{/* Hero Section */}
 			<section className="bg-gradient-to-r from-[#8ccbe5] to-[#b56c4d] pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-				{/* Background Pattern */}
-				<div
-					className="absolute inset-0 opacity-10"
-					style={{
-						backgroundImage: "url(/images/pattern.png)",
-						backgroundRepeat: "repeat",
-						backgroundSize: "100px 100px",
-					}}
-				/>
-
 				<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 					<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#2e5e73] mb-6 leading-tight">
 						Conference Program
@@ -202,7 +190,7 @@ export default function ProgramPage() {
 			</section>
 
 			{/* Filters Section */}
-			<section className="bg-white shadow-lg sticky top-0 z-40 border-b">
+			<section className="bg-white shadow-lg border-b">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 					<div className="flex flex-col sm:flex-row items-center justify-between gap-4">
 						{/* Category Filter */}
@@ -287,7 +275,10 @@ export default function ProgramPage() {
 								</thead>
 								<tbody>
 									{timeSlots.map((timeSlot, index) => {
+										// Commented out schedule content - keeping table structure
+										/*
 										const scheduleItem = scheduleData[activeDay]?.[timeSlot];
+										*/
 										return (
 											<tr
 												key={timeSlot}
@@ -296,6 +287,7 @@ export default function ProgramPage() {
 												<td className="px-6 py-4 text-sm font-medium text-gray-900 border-r border-gray-200">
 													{timeSlot}
 												</td>
+												{/*
 												{scheduleItem?.general ? (
 													<td
 														colSpan={rooms.length}
@@ -330,15 +322,18 @@ export default function ProgramPage() {
 														);
 													})
 												) : (
-													rooms.map((room) => (
-														<td
-															key={room}
-															className="px-6 py-4 border-r border-gray-200"
-														>
-															{/* Empty cell */}
-														</td>
-													))
+												*/}
+												{rooms.map((room) => (
+													<td
+														key={room}
+														className="px-6 py-4 border-r border-gray-200"
+													>
+														{/* Empty cell - content commented out */}
+													</td>
+												))}
+												{/*
 												)}
+												*/}
 											</tr>
 										);
 									})}

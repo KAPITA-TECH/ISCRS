@@ -60,14 +60,14 @@ const LeadershipCommittee: React.FC = () => {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-30 lg:gap-10 max-w-7xl mx-auto">
             {leaders.map((leader) => (
               <div
                 key={leader.id}
                 className="relative overflow-visible flex flex-col items-stretch"
               >
                 {/* Triangle-shaped blue and brown lines - with rounded left/right edges */}
-                <div 
+                <div
                   className="pointer-events-none absolute left-0 right-0 -top-9 h-12 z-10 overflow-hidden"
                   style={{ borderRadius: '24px 20px 60px 34px' }}
                 >
@@ -91,7 +91,7 @@ const LeadershipCommittee: React.FC = () => {
                 <div className="absolute left-1/2 -translate-x-1/2 -top-20 z-20">
                   <div className="w-36 h-36 mx-auto rounded-full relative overflow-hidden ring-2 ring-white">
                     {/* Pattern Image Background */}
-                    <div 
+                    <div
                       className="absolute inset-0 rounded-full"
                       style={{
                         backgroundImage: 'url(/images/pattern.png)',
@@ -173,5 +173,3 @@ const LeadershipCommittee: React.FC = () => {
 };
 
 export default LeadershipCommittee;
-
-
