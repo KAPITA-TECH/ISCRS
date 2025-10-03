@@ -46,7 +46,7 @@ export default function AbstractSubmission() {
                 After submitting your abstract, within a few minutes, you will
                 receive a confirmation email from{" "}
                 <span className="font-semibold text-[#38738c]">
-                  scientific@mocatiscrs.org
+                  info@mocatiscrs.org
                 </span>{" "}
                 on your registered email address (check your SPAM folder in case
                 it is misdirected).
@@ -200,7 +200,7 @@ export default function AbstractSubmission() {
                   href="mailto:info@iscrs.org"
                   className="text-[#38738c] font-semibold hover:underline"
                 >
-                  info@iscrs.org
+                  info@mocatiscrs.org
                 </a>
               </p>
             </div>
