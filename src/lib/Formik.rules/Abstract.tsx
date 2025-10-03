@@ -26,7 +26,7 @@ export default function AbstractSubmission() {
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
           <h2 className="text-4xl font-bold text-[#38738c] mb-8 text-center">
-            Welcome to EPOMEC 2026 Call for Abstracts
+            Welcome to MOCAT 5 2026 Call for Abstracts
           </h2>
 
           <div className="space-y-8 text-gray-700 leading-relaxed">
@@ -46,7 +46,7 @@ export default function AbstractSubmission() {
                 After submitting your abstract, within a few minutes, you will
                 receive a confirmation email from{" "}
                 <span className="font-semibold text-[#38738c]">
-                info@iscrs.org
+                  scientific@mocatiscrs.org
                 </span>{" "}
                 on your registered email address (check your SPAM folder in case
                 it is misdirected).
@@ -67,7 +67,7 @@ export default function AbstractSubmission() {
                     Abstract Submission deadline:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    15th Dec 2025, 18:00 (GMT)
+                    15th Dec 2025, 18:00 ( Baghdad Time)
                   </span>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
@@ -75,7 +75,7 @@ export default function AbstractSubmission() {
                     Scientific Committee Feedback:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    30th December 2025, 23:59 (GMT)
+                    30th December 2025, 23:59 ( Baghdad Time)
                   </span>
                 </div>
               </div>
