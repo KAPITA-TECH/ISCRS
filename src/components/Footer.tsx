@@ -8,17 +8,16 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Left Section - Logo & Description */}
-          <div className="space-y-4">
-            <div className="mb-4">
+          <div className="space-y-6 max-w-[250px]">
+            <div className="mb-6">
               <Image
-                src="/images/ISCRS_Logo_page-0001-removebg-preview.png"
+                src="/images/logo.svg"
                 alt="ISCRS Logo"
-                width={120}
-                height={60}
-                className="h-12 w-auto object-contain"
+                width={160}
+                height={120}
               />
             </div>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-gray-600 text-[16px] leading-relaxed">
               Iraqi Society of Cataract and Refractive Surgery
             </p>
 
