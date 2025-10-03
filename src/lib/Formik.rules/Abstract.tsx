@@ -26,7 +26,7 @@ export default function AbstractSubmission() {
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
           <h2 className="text-4xl font-bold text-[#38738c] mb-8 text-center">
-            Welcome to EPOMEC 2025 Call for Abstracts
+            Welcome to EPOMEC 2026 Call for Abstracts
           </h2>
 
           <div className="space-y-8 text-gray-700 leading-relaxed">
@@ -46,22 +46,10 @@ export default function AbstractSubmission() {
                 After submitting your abstract, within a few minutes, you will
                 receive a confirmation email from{" "}
                 <span className="font-semibold text-[#38738c]">
-                  epomec@wearemci.com
+                info@iscrs.org
                 </span>{" "}
                 on your registered email address (check your SPAM folder in case
                 it is misdirected).
-              </p>
-              <p className="mb-4">
-                You can save the login credentials and revert to the same link
-                to make any further changes. Alternatively, once you have
-                created your account, you can visit{" "}
-                <span className="font-semibold text-[#38738c]">
-                  www.epomec.ae
-                </span>{" "}
-                and click on the call for abstract button, then select existing
-                user. Once logged in, you can view your existing submissions
-                from the top navigation bar or create new submissions from the
-                home page by clicking Submit Your Abstract Here.
               </p>
               <p className="font-semibold text-lg text-[#94573d]">
                 We look forward to receiving your scientific abstracts!
@@ -79,7 +67,7 @@ export default function AbstractSubmission() {
                     Abstract Submission deadline:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    11th September 2025, 18:00 (GST)
+                    15th Dec 2025, 18:00 (GMT)
                   </span>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
@@ -87,7 +75,7 @@ export default function AbstractSubmission() {
                     Scientific Committee Feedback:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    22nd September 2025, 23:59 (GST)
+                    30th December 2025, 23:59 (GMT)
                   </span>
                 </div>
               </div>
@@ -126,8 +114,7 @@ export default function AbstractSubmission() {
                   confirmation email along with the details for the registration
                   process based on whether they are Doctors or Medical
                   Residents. This will be followed by an email with the
-                  guidelines of how to submit their presentation via the EPOMEC
-                  PowerPoint template.
+                  guidelines of how to submit their presentation.
                 </p>
               </div>
 
@@ -140,11 +127,7 @@ export default function AbstractSubmission() {
                   <li>
                     If your abstract is accepted as an ePoster, you will receive
                     a confirmation email along with the steps of how to submit
-                    your ePoster presentation via the EPOMEC template
-                  </li>
-                  <li>
-                    EPOMEC ePoster template will be shared as a PowerPoint with
-                    the exact dimensions
+                    your ePoster presentation.
                   </li>
                   <li>ePosters must be submitted in PDF format</li>
                 </ul>
@@ -214,10 +197,10 @@ export default function AbstractSubmission() {
               <p className="mt-4 text-sm text-gray-600">
                 For any further clarification, please contact{" "}
                 <a
-                  href="mailto:admin@epomec.ae"
+                  href="mailto:info@iscrs.org"
                   className="text-[#38738c] font-semibold hover:underline"
                 >
-                  admin@epomec.ae
+                  info@iscrs.org
                 </a>
               </p>
             </div>
