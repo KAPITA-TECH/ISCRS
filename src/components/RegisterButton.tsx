@@ -21,7 +21,7 @@ const RegisterButton = ({
 	);
 
 	return (
-		<Link href="#register" className={classes} onClick={onClick}>
+		<Link href="/attendee-registration" className={classes} onClick={onClick}>
 			Register
 		</Link>
 	);
