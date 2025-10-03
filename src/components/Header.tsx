@@ -26,8 +26,8 @@ interface NavLinkProps {
 // Constants
 const navigationLinks: NavigationLink[] = [
 	{ name: "About ISCRS", href: "/about" },
-	{ 
-		name: "MOCAT5", 
+	{
+		name: "MOCAT5",
 		href: "#",
 		dropdown: [
 			{ name: "Program", href: "/program" },
@@ -121,7 +121,7 @@ const Header = () => {
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
 						</svg>
 					</button>
-					
+
 					{activeDropdown === link.name && (
 						<div className="absolute top-full left-0 mt-1 bg-white/20 backdrop-blur-lg rounded-lg shadow-lg border border-white py-2 min-w-[150px] z-50">
 							{link.dropdown.map((item) => (
@@ -169,11 +169,11 @@ const Header = () => {
 					aria-label="ISCRS Home"
 				>
 					<Image
-						src="/images/ISCRS_Logo_page-0001-removebg-preview.png"
+						src="/images/logo.svg"
 						alt="ISCRS Logo"
-						width={280}
-						height={140}
-						className="h-16 lg:h-20 xl:h-24 w-auto transition-all duration-300 hover:scale-105"
+						width={70}
+						height={70}
+						className="ml-8 w-auto transition-all duration-300 hover:scale-105"
 						priority
 					/>
 				</Link>
