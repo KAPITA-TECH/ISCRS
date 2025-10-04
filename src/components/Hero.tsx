@@ -1,9 +1,13 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden pt-20" style={{ minHeight: '150vh' }}>
+    <section
+      className="relative min-h-screen overflow-hidden pt-20"
+      style={{ minHeight: "150vh" }}
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -18,7 +22,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
         {/* Vector Image */}
         <div className="mb-8 flex justify-center">
           <Image
@@ -52,8 +56,9 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-base sm:text-lg lg:text-xl text-[#a3715d] mb-8 max-w-3xl mx-auto leading-relaxed">
-          Join us for the fifth of MOCAT, bringing together leading ophthalmologists, 
-          surgeons, and eye care professionals from Iraq and the region
+          Join us for the fifth of MOCAT, bringing together leading
+          ophthalmologists, surgeons, and eye care professionals from Iraq and
+          the region
         </p>
 
         {/* Event Date and Location */}
@@ -63,12 +68,18 @@ const Hero = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center mb-16">
-          <button className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
+          <Link
+            href="/attendee-registration"
+            className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+          >
             Register
-          </button>
-          <button className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
-            Sponsor
-          </button>
+          </Link>
+          <Link
+            href="/abstract"
+            className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+          >
+            Abstract submission
+          </Link>
         </div>
       </div>
     </section>

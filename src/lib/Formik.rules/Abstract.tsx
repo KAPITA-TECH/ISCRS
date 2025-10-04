@@ -5,16 +5,13 @@ export default function AbstractSubmission() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#38738c] to-[#94573d] text-white py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtNi42MjcgMC0xMiA1LjM3My0xMiAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3My0xMi0xMi0xMnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==')] bg-repeat"></div>
-        </div>
+      <section className="relative bg-gradient-to-r from-[#8ccbe5] to-[#b56c4d] text-[#2e5e73] py-30 px-4 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-            ISRC Abstract Submission
+            MOCAT Abstract Submission
           </h1>
-          <p className="text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-8">
-            Submit your abstract to be part of the ISRC.
+          <p className="text-xl md:text-2xl text-[#2e5e73] max-w-3xl mx-auto leading-relaxed mb-8">
+            Submit your abstract to be part of MOCAT.
           </p>
           <Link
             href="/abstract/submit"
@@ -29,7 +26,7 @@ export default function AbstractSubmission() {
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
           <h2 className="text-4xl font-bold text-[#38738c] mb-8 text-center">
-            Welcome to EPOMEC 2025 Call for Abstracts
+            Welcome to MOCAT 5 2026 Call for Abstracts
           </h2>
 
           <div className="space-y-8 text-gray-700 leading-relaxed">
@@ -49,22 +46,10 @@ export default function AbstractSubmission() {
                 After submitting your abstract, within a few minutes, you will
                 receive a confirmation email from{" "}
                 <span className="font-semibold text-[#38738c]">
-                  epomec@wearemci.com
+                  info@mocatiscrs.org
                 </span>{" "}
                 on your registered email address (check your SPAM folder in case
                 it is misdirected).
-              </p>
-              <p className="mb-4">
-                You can save the login credentials and revert to the same link
-                to make any further changes. Alternatively, once you have
-                created your account, you can visit{" "}
-                <span className="font-semibold text-[#38738c]">
-                  www.epomec.ae
-                </span>{" "}
-                and click on the call for abstract button, then select existing
-                user. Once logged in, you can view your existing submissions
-                from the top navigation bar or create new submissions from the
-                home page by clicking Submit Your Abstract Here.
               </p>
               <p className="font-semibold text-lg text-[#94573d]">
                 We look forward to receiving your scientific abstracts!
@@ -82,7 +67,7 @@ export default function AbstractSubmission() {
                     Abstract Submission deadline:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    11th September 2025, 18:00 (GST)
+                    15th Dec 2025, 18:00 ( Baghdad Time)
                   </span>
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between">
@@ -90,7 +75,7 @@ export default function AbstractSubmission() {
                     Scientific Committee Feedback:
                   </span>
                   <span className="text-[#94573d] font-bold">
-                    22nd September 2025, 23:59 (GST)
+                    30th December 2025, 23:59 ( Baghdad Time)
                   </span>
                 </div>
               </div>
@@ -129,8 +114,7 @@ export default function AbstractSubmission() {
                   confirmation email along with the details for the registration
                   process based on whether they are Doctors or Medical
                   Residents. This will be followed by an email with the
-                  guidelines of how to submit their presentation via the EPOMEC
-                  PowerPoint template.
+                  guidelines of how to submit their presentation.
                 </p>
               </div>
 
@@ -143,11 +127,7 @@ export default function AbstractSubmission() {
                   <li>
                     If your abstract is accepted as an ePoster, you will receive
                     a confirmation email along with the steps of how to submit
-                    your ePoster presentation via the EPOMEC template
-                  </li>
-                  <li>
-                    EPOMEC ePoster template will be shared as a PowerPoint with
-                    the exact dimensions
+                    your ePoster presentation.
                   </li>
                   <li>ePosters must be submitted in PDF format</li>
                 </ul>
@@ -216,12 +196,12 @@ export default function AbstractSubmission() {
               </ul>
               <p className="mt-4 text-sm text-gray-600">
                 For any further clarification, please contact{" "}
-                <a
-                  href="mailto:admin@epomec.ae"
+                <Link
+                  href="mailto:info@mocatiscrs.org"
                   className="text-[#38738c] font-semibold hover:underline"
                 >
-                  admin@epomec.ae
-                </a>
+                  info@mocatiscrs.org
+                </Link>
               </p>
             </div>
           </div>
@@ -241,7 +221,7 @@ export default function AbstractSubmission() {
       {/* Awards Section */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-5xl font-bold text-center text-[#38738c] mb-16">
-          Best Abstract Awards
+          MOCAT Abstract Awards 2026
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -254,24 +234,31 @@ export default function AbstractSubmission() {
                 <span className="text-3xl">🏆</span>
               </div>
               <h3 className="text-2xl font-bold text-[#38738c] mb-4">
-                Top 7 Abstract Winners
+                Top Abstracts Recognition
               </h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-[#94573d] mr-2">✓</span>
-                  <span>
-                    Flight ticket to attend international conference in Europe
-                  </span>
+                  <span>Certificate of Excellence</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#94573d] mr-2">✓</span>
-                  <span>Recognized in EPOMEC Champions League 2025</span>
+                  <span>Recognition on MOCAT website and social media </span>
+                </li>
+
+                <li className="flex items-start">
+                  <span className="text-[#94573d] mr-2">✓</span>
+                  <span>Complimentary registration for MOCAT 2027 </span>
+                </li>
+
+                <li className="flex items-start">
+                  <span className="text-[#94573d] mr-2">✓</span>
+                  <span>
+                    {" "}
+                    Invitation to present during the “MOCAT Best Papers” session
+                  </span>
                 </li>
               </ul>
-              <p className="mt-4 text-sm font-semibold text-[#94573d] italic">
-                Top 7 will be chosen via voting on the last day of the
-                conference
-              </p>
             </div>
           </div>
 
@@ -284,32 +271,32 @@ export default function AbstractSubmission() {
                 <span className="text-3xl">🥇</span>
               </div>
               <h3 className="text-2xl font-bold text-[#94573d] mb-4">
-                First Place Winners
+                1st Place Winner
               </h3>
+
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>Trophy for 12th EPOMEC abstract submission</span>
+                  <span>MOCAT Gold Abstract Award</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#38738c] mr-2">✓</span>
+                  <span>Trophy + framed certificate</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
                   <span>
-                    Complimentary EPOMEC 2026 registration (+1 ophthalmologist)
+                    Complimentary registration for MOCAT 2027 (+1
+                    ophthalmologist)
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>
-                    Complimentary hotel accommodation (double occupancy)
-                  </span>
+                  <span>Hotel accommodation (1 night during MOCAT 2027)</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>Acknowledgement via social media reel</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[#38738c] mr-2">✓</span>
-                  <span>Recognition on EPOMEC Wall of Fame</span>
+                  <span>Highlighted feature on social media</span>
                 </li>
               </ul>
             </div>
@@ -324,28 +311,24 @@ export default function AbstractSubmission() {
                 <span className="text-3xl">🥈</span>
               </div>
               <h3 className="text-2xl font-bold text-[#38738c] mb-4">
-                Second Place Winners
+                2nd Place Winner
               </h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-[#94573d] mr-2">✓</span>
-                  <span>
-                    Second place trophy for 12th EPOMEC abstract submission
-                  </span>
+                  <span>MOCAT Silver Abstract Award</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#94573d] mr-2">✓</span>
-                  <span>
-                    Complimentary conference registration with a +1 for an
-                    ophthalmologist for EPOMEC 2026
-                  </span>
+                  <span>Trophy + framed certificate</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#94573d] mr-2">✓</span>
-                  <span>
-                    Prestigious recognition with photos and names of the winners
-                    in the EPOMEC Wall of Fame
-                  </span>
+                  <span>Complimentary registration for MOCAT 2027</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#94573d] mr-2">✓</span>
+                  <span>Recognition on website</span>
                 </li>
               </ul>
             </div>
@@ -360,27 +343,20 @@ export default function AbstractSubmission() {
                 <span className="text-3xl">🥉</span>
               </div>
               <h3 className="text-2xl font-bold text-[#94573d] mb-4">
-                Third Place Winners
+                3rd Place Winner
               </h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>
-                    Third place trophy for 12th EPOMEC abstract submission
-                  </span>
+                  <span>MOCAT Bronze Abstract Award</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>
-                    Complimentary conference registration for EPOMEC 2026
-                  </span>
+                  <span>Trophy + certificate</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#38738c] mr-2">✓</span>
-                  <span>
-                    Prestigious recognition with photos and names of the winners
-                    in the EPOMEC Wall of Fame
-                  </span>
+                  <span>Recognition on website</span>
                 </li>
               </ul>
             </div>
