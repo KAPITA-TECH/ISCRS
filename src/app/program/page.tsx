@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Metadata } from "next";
+
 
 interface Course {
 	id: string;
@@ -17,14 +17,7 @@ interface Course {
 	}[];
 }
 
-interface ScheduleData {
-	[key: string]: {
-		[timeSlot: string]: {
-			general?: string;
-			courses?: Course[];
-		};
-	};
-}
+
 
 // Commented out schedule data - keeping for reference
 /*
@@ -159,10 +152,7 @@ export default function ProgramPage() {
 		{ key: "day2", label: "Friday, January 23, 2026" },
 	];
 
-	const handleCourseClick = (course: Course) => {
-		setSelectedCourse(course);
-	};
-
+	
 	const clearFilters = () => {
 		setSearchFilters({
 			search: "",

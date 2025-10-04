@@ -23,8 +23,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "define-data-property": "^1.1.4",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "espree": "^10.4.0",
+    "side-channel-list": "^1.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
