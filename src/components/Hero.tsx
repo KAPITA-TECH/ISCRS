@@ -74,9 +74,12 @@ const Hero = () => {
           >
             Register
           </Link>
-          <button className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
-            Sponsor
-          </button>
+          <Link
+            href="/abstract"
+            className="bg-[#7a4027] text-white px-6 py-2 text-sm font-medium rounded-md hover:bg-[#6a3622] shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+          >
+            Abstract submission
+          </Link>
         </div>
       </div>
     </section>

@@ -156,10 +156,11 @@ const Footer = () => {
                   />
                 </svg>
                 <a
-                  href="mailto:info@iscrs.org"
+                  href="mailto:info@mocatiscrs.org
+"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
                 >
-                  info@iscrs.org
+                  info@mocatiscrs.org
                 </a>
               </div>
 
@@ -178,10 +179,10 @@ const Footer = () => {
                   />
                 </svg>
                 <a
-                  href="tel:+964000000000"
+                  href="tel:+9647747948778"
                   className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
                 >
-                  +964 000 000 000
+                  +9647747948778
                 </a>
               </div>
 

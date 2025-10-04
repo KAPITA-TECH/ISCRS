@@ -1,22 +1,25 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useState } from "react";
+import Image from "next/image";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
   membershipInitialValues,
   formSteps,
   iraqiGovernorates,
   jobTitles,
-  handleMembershipSubmit
-} from '@/lib/Formik.rules/Membership';
+  handleMembershipSubmit,
+} from "@/lib/Formik.rules/Membership";
 
 const MembershipForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const isLastStep = currentStep === formSteps.length - 1;
   const currentStepData = formSteps[currentStep];
 
-  const handleSubmit = async (values: typeof membershipInitialValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async (
+    values: typeof membershipInitialValues,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
     if (isLastStep) {
       // Final submission
       await handleMembershipSubmit(values);
@@ -35,14 +38,21 @@ const MembershipForm = () => {
   };
 
   // Helper function to render step fields
-  const renderStepFields = (step: number, values: typeof membershipInitialValues, setFieldValue: (field: string, value: File | string | null) => void) => {
+  const renderStepFields = (
+    step: number,
+    values: typeof membershipInitialValues,
+    setFieldValue: (field: string, value: File | string | null) => void
+  ) => {
     if (step === 0) {
       return (
         <>
           {/* Step 1: Personal Information */}
           {/* Email Address */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Email Address *
             </label>
             <Field
@@ -52,12 +62,19 @@ const MembershipForm = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
               placeholder="Enter your email address"
             />
-            <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Full Name in English */}
           <div>
-            <label htmlFor="fullNameEnglish" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="fullNameEnglish"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Full Name in English *
             </label>
             <Field
@@ -67,12 +84,19 @@ const MembershipForm = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
               placeholder="Enter your full name in English"
             />
-            <ErrorMessage name="fullNameEnglish" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="fullNameEnglish"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Full Name in Arabic */}
           <div>
-            <label htmlFor="fullNameArabic" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="fullNameArabic"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Your name in Arabic *
             </label>
             <Field
@@ -83,12 +107,19 @@ const MembershipForm = () => {
               placeholder="اكتب اسمك بالعربية"
               dir="rtl"
             />
-            <ErrorMessage name="fullNameArabic" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="fullNameArabic"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Age */}
           <div>
-            <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="age"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Age *
             </label>
             <Field
@@ -97,7 +128,11 @@ const MembershipForm = () => {
               name="age"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
             />
-            <ErrorMessage name="age" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="age"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Nationality */}
@@ -114,7 +149,10 @@ const MembershipForm = () => {
                   value="iraqi"
                   className="h-4 w-4 text-[#38738c] focus:ring-[#38738c] border-gray-300"
                 />
-                <label htmlFor="nationality-iraqi" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="nationality-iraqi"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Iraqi
                 </label>
               </div>
@@ -126,11 +164,14 @@ const MembershipForm = () => {
                   value="others"
                   className="h-4 w-4 text-[#38738c] focus:ring-[#38738c] border-gray-300"
                 />
-                <label htmlFor="nationality-others" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="nationality-others"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Others
                 </label>
               </div>
-              {values.nationality === 'others' && (
+              {values.nationality === "others" && (
                 <Field
                   type="text"
                   name="nationalityOther"
@@ -139,13 +180,24 @@ const MembershipForm = () => {
                 />
               )}
             </div>
-            <ErrorMessage name="nationality" component="div" className="text-red-500 text-sm mt-1" />
-            <ErrorMessage name="nationalityOther" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="nationality"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
+            <ErrorMessage
+              name="nationalityOther"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* City of Residence */}
           <div>
-            <label htmlFor="cityOfResidence" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="cityOfResidence"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               City of Residence *
             </label>
             <Field
@@ -161,12 +213,19 @@ const MembershipForm = () => {
                 </option>
               ))}
             </Field>
-            <ErrorMessage name="cityOfResidence" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="cityOfResidence"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Phone Number */}
           <div>
-            <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Phone Number (WhatsApp) *
             </label>
             <Field
@@ -176,7 +235,11 @@ const MembershipForm = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
               placeholder="+964XXXXXXXXX"
             />
-            <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="phoneNumber"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
         </>
       );
@@ -199,7 +262,7 @@ const MembershipForm = () => {
                 accept="image/*"
                 onChange={(event) => {
                   const file = event.currentTarget.files?.[0] || null;
-                  setFieldValue('professionalPhoto', file);
+                  setFieldValue("professionalPhoto", file);
                 }}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -219,7 +282,8 @@ const MembershipForm = () => {
                     />
                   </svg>
                   <span className="text-[#38738c] font-medium">
-                    {(values.professionalPhoto as unknown as File)?.name || 'Add File'}
+                    {(values.professionalPhoto as unknown as File)?.name ||
+                      "Add File"}
                   </span>
                 </div>
                 {values.professionalPhoto && (
@@ -227,10 +291,12 @@ const MembershipForm = () => {
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setFieldValue('professionalPhoto', null);
+                      setFieldValue("professionalPhoto", null);
                       // Reset the file input
-                      const fileInput = document.getElementById('professionalPhoto') as HTMLInputElement;
-                      if (fileInput) fileInput.value = '';
+                      const fileInput = document.getElementById(
+                        "professionalPhoto"
+                      ) as HTMLInputElement;
+                      if (fileInput) fileInput.value = "";
                     }}
                     className="ml-2 p-1 hover:bg-red-100 rounded-full transition-colors duration-200"
                     title="Remove file"
@@ -252,13 +318,22 @@ const MembershipForm = () => {
                 )}
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1">Upload 1 supported file. Max 10 MB.</p>
-            <ErrorMessage name="professionalPhoto" component="div" className="text-red-500 text-sm mt-1" />
+            <p className="text-xs text-gray-500 mt-1">
+              Upload 1 supported file. Max 10 MB.
+            </p>
+            <ErrorMessage
+              name="professionalPhoto"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Current Workplace */}
           <div>
-            <label htmlFor="currentWorkplace" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="currentWorkplace"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Current Workplace / Affiliation *
             </label>
             <Field
@@ -268,12 +343,19 @@ const MembershipForm = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
               placeholder="Enter your current workplace or affiliation"
             />
-            <ErrorMessage name="currentWorkplace" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="currentWorkplace"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Job Title */}
           <div>
-            <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="jobTitle"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Job Title *
             </label>
             <Field
@@ -289,7 +371,11 @@ const MembershipForm = () => {
                 </option>
               ))}
             </Field>
-            <ErrorMessage name="jobTitle" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="jobTitle"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Medical Degrees */}
@@ -305,7 +391,7 @@ const MembershipForm = () => {
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 onChange={(event) => {
                   const file = event.currentTarget.files?.[0] || null;
-                  setFieldValue('medicalDegrees', file);
+                  setFieldValue("medicalDegrees", file);
                 }}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -325,7 +411,8 @@ const MembershipForm = () => {
                     />
                   </svg>
                   <span className="text-[#38738c] font-medium">
-                    {(values.medicalDegrees as unknown as File)?.name || 'Add File'}
+                    {(values.medicalDegrees as unknown as File)?.name ||
+                      "Add File"}
                   </span>
                 </div>
                 {values.medicalDegrees && (
@@ -333,10 +420,12 @@ const MembershipForm = () => {
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setFieldValue('medicalDegrees', null);
+                      setFieldValue("medicalDegrees", null);
                       // Reset the file input
-                      const fileInput = document.getElementById('medicalDegrees') as HTMLInputElement;
-                      if (fileInput) fileInput.value = '';
+                      const fileInput = document.getElementById(
+                        "medicalDegrees"
+                      ) as HTMLInputElement;
+                      if (fileInput) fileInput.value = "";
                     }}
                     className="ml-2 p-1 hover:bg-red-100 rounded-full transition-colors duration-200"
                     title="Remove file"
@@ -358,13 +447,22 @@ const MembershipForm = () => {
                 )}
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1">Upload 1 supported file. Max 10 MB.</p>
-            <ErrorMessage name="medicalDegrees" component="div" className="text-red-500 text-sm mt-1" />
+            <p className="text-xs text-gray-500 mt-1">
+              Upload 1 supported file. Max 10 MB.
+            </p>
+            <ErrorMessage
+              name="medicalDegrees"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Subspecialty */}
           <div>
-            <label htmlFor="subspecialty" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="subspecialty"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Subspecialty (if applicable)
             </label>
             <Field
@@ -374,7 +472,11 @@ const MembershipForm = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:border-transparent"
               placeholder="Enter your subspecialty if applicable"
             />
-            <ErrorMessage name="subspecialty" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="subspecialty"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
         </>
       );
@@ -398,7 +500,10 @@ const MembershipForm = () => {
                   value="renewal"
                   className="h-4 w-4 text-[#38738c] focus:ring-[#38738c] border-gray-300"
                 />
-                <label htmlFor="membershipStatus-renewal" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="membershipStatus-renewal"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Re-renewal
                 </label>
               </div>
@@ -410,12 +515,19 @@ const MembershipForm = () => {
                   value="firsttime"
                   className="h-4 w-4 text-[#38738c] focus:ring-[#38738c] border-gray-300"
                 />
-                <label htmlFor="membershipStatus-firsttime" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="membershipStatus-firsttime"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   First time
                 </label>
               </div>
             </div>
-            <ErrorMessage name="membershipStatus" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="membershipStatus"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Membership Request */}
@@ -423,16 +535,16 @@ const MembershipForm = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Membership request: Download, fill then upload *
             </label>
-            
+
             {/* Membership Request Image */}
             <div className="mb-4 flex justify-center">
-              <Image 
-                src="/images/Membership request.png" 
-                alt="Membership Request Form" 
+              <Image
+                src="/images/Membership request.png"
+                alt="Membership Request Form"
                 width={600}
                 height={400}
                 className="max-w-full h-auto rounded-lg shadow-md border border-gray-200"
-                style={{ maxHeight: '400px' }}
+                style={{ maxHeight: "400px" }}
               />
             </div>
 
@@ -445,7 +557,7 @@ const MembershipForm = () => {
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 onChange={(event) => {
                   const file = event.currentTarget.files?.[0] || null;
-                  setFieldValue('membershipRequest', file);
+                  setFieldValue("membershipRequest", file);
                 }}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
@@ -465,7 +577,8 @@ const MembershipForm = () => {
                     />
                   </svg>
                   <span className="text-[#38738c] font-medium">
-                    {(values.membershipRequest as unknown as File)?.name || 'Add File'}
+                    {(values.membershipRequest as unknown as File)?.name ||
+                      "Add File"}
                   </span>
                 </div>
                 {values.membershipRequest && (
@@ -473,10 +586,12 @@ const MembershipForm = () => {
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setFieldValue('membershipRequest', null);
+                      setFieldValue("membershipRequest", null);
                       // Reset the file input
-                      const fileInput = document.getElementById('membershipRequest') as HTMLInputElement;
-                      if (fileInput) fileInput.value = '';
+                      const fileInput = document.getElementById(
+                        "membershipRequest"
+                      ) as HTMLInputElement;
+                      if (fileInput) fileInput.value = "";
                     }}
                     className="ml-2 p-1 hover:bg-red-100 rounded-full transition-colors duration-200"
                     title="Remove file"
@@ -498,8 +613,14 @@ const MembershipForm = () => {
                 )}
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1">Upload 1 supported file. Max 10 MB.</p>
-            <ErrorMessage name="membershipRequest" component="div" className="text-red-500 text-sm mt-1" />
+            <p className="text-xs text-gray-500 mt-1">
+              Upload 1 supported file. Max 10 MB.
+            </p>
+            <ErrorMessage
+              name="membershipRequest"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
         </>
       );
@@ -525,8 +646,8 @@ const MembershipForm = () => {
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                       index <= currentStep
-                        ? 'bg-[#38738c] text-white'
-                        : 'bg-gray-200 text-gray-500'
+                        ? "bg-[#38738c] text-white"
+                        : "bg-gray-200 text-gray-500"
                     }`}
                   >
                     {index + 1}
@@ -534,7 +655,7 @@ const MembershipForm = () => {
                   {index < formSteps.length - 1 && (
                     <div
                       className={`w-16 h-1 ml-4 ${
-                        index < currentStep ? 'bg-[#38738c]' : 'bg-gray-200'
+                        index < currentStep ? "bg-[#38738c]" : "bg-gray-200"
                       }`}
                     />
                   )}
@@ -545,7 +666,9 @@ const MembershipForm = () => {
               <h3 className="text-lg font-semibold text-[#1d5875]">
                 {currentStepData.title}
               </h3>
-              <p className="text-gray-600 text-sm">{currentStepData.subtitle}</p>
+              <p className="text-gray-600 text-sm">
+                {currentStepData.subtitle}
+              </p>
             </div>
           </div>
 
@@ -577,14 +700,17 @@ const MembershipForm = () => {
                     disabled={isSubmitting}
                     className={`px-6 py-2 rounded-md font-medium text-white transition-colors duration-200 ${
                       isSubmitting
-                        ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-[#38738c] hover:bg-[#2d5a6b] focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:ring-offset-2'
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-[#38738c] hover:bg-[#2d5a6b] focus:outline-none focus:ring-2 focus:ring-[#38738c] focus:ring-offset-2"
                     }`}
                   >
                     {isSubmitting
-                      ? (isLastStep ? 'Submitting...' : 'Processing...')
-                      : (isLastStep ? 'Submit Application' : 'Next')
-                    }
+                      ? isLastStep
+                        ? "Submitting..."
+                        : "Processing..."
+                      : isLastStep
+                      ? "Submit Application"
+                      : "Next"}
                   </button>
                 </div>
               </Form>
