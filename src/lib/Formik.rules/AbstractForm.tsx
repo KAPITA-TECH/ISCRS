@@ -253,21 +253,10 @@ const countries = [
 export default function AbstractForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSubmittedBefore, setHasSubmittedBefore] = useState(false);
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [countrySearch, setCountrySearch] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const countryDropdownRef = useRef<HTMLDivElement>(null);
-
-  // Check if user has submitted before (from localStorage)
-  useEffect(() => {
-    const submittedEmails = JSON.parse(
-      localStorage.getItem("submittedAbstracts") || "[]"
-    );
-    if (submittedEmails.length > 0) {
-      setHasSubmittedBefore(true);
-    }
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -283,7 +272,17 @@ export default function AbstractForm() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleFormSubmit = async (values: any) => {
+  const handleFormSubmit = async (values: {
+    fullName: string;
+    mobileNumber: string;
+    placeOfWork: string;
+    country: string;
+    email: string;
+    subspecialties: string;
+    otherSubspecialty?: string;
+    abstractTitle: string;
+    abstract: string;
+  }) => {
     console.log("Form submission started", values);
     setIsLoading(true);
 

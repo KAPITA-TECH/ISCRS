@@ -21,12 +21,12 @@ const acceptedSubmissionSchema = Yup.object({
     .test(
       "fileType",
       "Only PDF files are allowed",
-      (value: any) => !value || (value && value.type === "application/pdf")
+      (value) => !value || (value && (value as File).type === "application/pdf")
     )
     .test(
       "fileSize",
       "File size must be less than 10 MB",
-      (value: any) => !value || (value && value.size <= 10 * 1024 * 1024)
+      (value) => !value || (value && (value as File).size <= 10 * 1024 * 1024)
     ),
 });
 
@@ -35,7 +35,12 @@ export default function AcceptedSubmissionPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
 
-  const handleFormSubmit = async (values: any) => {
+  const handleFormSubmit = async (values: {
+    email: string;
+    text: string;
+    subject: string;
+    pdfFile: File | null;
+  }) => {
     setIsLoading(true);
 
     try {
@@ -197,7 +202,13 @@ export default function AcceptedSubmissionPage() {
             validationSchema={acceptedSubmissionSchema}
             onSubmit={handleFormSubmit}
           >
-            {({ setFieldValue, values }) => (
+            {({
+              setFieldValue,
+              values,
+            }: {
+              setFieldValue: (field: string, value: unknown) => void;
+              values: { subject: string };
+            }) => (
               <Form className="space-y-6">
                 {/* Email */}
                 <div>
