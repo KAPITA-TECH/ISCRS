@@ -1,134 +1,468 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 
-// Validation schemas for each page
-const page1Schema = Yup.object({
+// Single-page validation schema
+const formSchema = Yup.object({
+  fullName: Yup.string().required("Full name is required"),
+  mobileNumber: Yup.string()
+    .matches(/^[0-9+\s()-]+$/, "Invalid mobile number")
+    .required("Mobile number is required"),
+  placeOfWork: Yup.string().required("Place of work is required"),
+  country: Yup.string().required("Country is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  fullNameEnglish: Yup.string().required("Full name in English is required"),
-  fullNameArabic: Yup.string().required("Full name in Arabic is required"),
-  age: Yup.date()
-    .required("Age is required")
-    .max(new Date(), "Date cannot be in the future"),
-  nationality: Yup.string().required("Nationality is required"),
-  nationalityOther: Yup.string().when("nationality", {
-    is: "Others",
-    then: (schema) => schema.required("Please specify your nationality"),
+  subspecialties: Yup.string().required("Subspecialties is required"),
+  otherSubspecialty: Yup.string().when("subspecialties", {
+    is: "Other",
+    then: (schema) => schema.required("Please specify your subspecialty"),
     otherwise: (schema) => schema.notRequired(),
   }),
-  cityOfResidence: Yup.string().required("City of residence is required"),
-  phoneNumber: Yup.string()
-    .matches(/^[0-9+\s()-]+$/, "Invalid phone number")
-    .required("Phone number is required"),
-  title: Yup.string()
-    .max(250, "Title must be 250 characters or less")
-    .required("Title is required"),
-  subject: Yup.string()
-    .max(250, "Subject must be 250 characters or less")
-    .required("Subject is required"),
+  abstractTitle: Yup.string()
+    .max(250, "Abstract title must be 250 characters or less")
+    .required("Abstract title is required"),
+  abstract: Yup.string()
+    .min(50, "Abstract must be at least 50 characters")
+    .required("Abstract is required"),
 });
 
-const page2Schema = Yup.object({
-  professionalPhoto: Yup.mixed().required("Professional photo is required"),
-  currentWorkplace: Yup.string().required("Current workplace is required"),
-  jobTitle: Yup.string().required("Job title is required"),
-  medicalDegreeDocument: Yup.mixed().required(
-    "Medical degrees document is required"
-  ),
-  subspecialty: Yup.string(),
-});
-
-const page3Schema = Yup.object({
-  abstractStatus: Yup.string().required("Abstract status is required"),
-  membershipRequest: Yup.mixed().required(
-    "Membership request file is required"
-  ),
-});
-
-const iraqiGovernorates = [
-  "Baghdad",
-  "Basra",
-  "Nineveh",
-  "Erbil",
-  "Sulaymaniyah",
-  "Duhok",
-  "Anbar",
-  "Diyala",
-  "Kirkuk",
-  "Najaf",
-  "Karbala",
-  "Babil",
-  "Wasit",
-  "Saladin",
-  "Maysan",
-  "Dhi Qar",
-  "Muthanna",
-  "Qadisiyyah",
+const subspecialties = [
+  "Cataract Surgery",
+  "Refractive Surgery",
+  "Cornea and External Disease",
+  "Glaucoma",
+  "Retina and Vitreous",
+  "Uveitis",
+  "Oculoplastics and Orbit",
+  "Neuro-Ophthalmology",
+  "Pediatric Ophthalmology and Strabismus",
+  "Ocular Oncology",
+  "Anterior Segment",
+  "Posterior Segment",
+  "Medical Retina",
+  "Surgical Retina",
+  "Ocular Surface and External Disease",
+  "Ophthalmic Pathology",
+  "Low Vision and Rehabilitation",
+  "Comprehensive Ophthalmology",
+  "Other",
 ];
 
-const jobTitles = [
-  "Resident - Plain",
-  "Resident - Board",
-  "General Practitioner",
-  "Specialist",
-  "Consultant",
+const countries = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Argentina",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia and Herzegovina",
+  "Botswana",
+  "Brazil",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
+  "Cape Verde",
+  "Central African Republic",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Comoros",
+  "Congo",
+  "Costa Rica",
+  "Croatia",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "East Timor",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Estonia",
+  "Ethiopia",
+  "Fiji",
+  "Finland",
+  "France",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Greece",
+  "Grenada",
+  "Guatemala",
+  "Guinea",
+  "Guinea-Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Ivory Coast",
+  "Jamaica",
+  "Japan",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kiribati",
+  "Kosovo",
+  "Kuwait",
+  "Kyrgyzstan",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Macedonia",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Marshall Islands",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Micronesia",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Namibia",
+  "Nauru",
+  "Nepal",
+  "Netherlands",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "North Korea",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palau",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Qatar",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Kitts and Nevis",
+  "Saint Lucia",
+  "Saint Vincent and the Grenadines",
+  "Samoa",
+  "San Marino",
+  "Sao Tome and Principe",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "Solomon Islands",
+  "Somalia",
+  "South Africa",
+  "South Korea",
+  "South Sudan",
+  "Spain",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Swaziland",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Togo",
+  "Tonga",
+  "Trinidad and Tobago",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Tuvalu",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "United States",
+  "Uruguay",
+  "Uzbekistan",
+  "Vanuatu",
+  "Vatican City",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe",
 ];
 
 export default function AbstractForm() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [formData, setFormData] = useState({
-    email: "",
-    fullNameEnglish: "",
-    fullNameArabic: "",
-    age: "",
-    nationality: "",
-    nationalityOther: "",
-    cityOfResidence: "",
-    phoneNumber: "",
-    title: "",
-    subject: "",
-    professionalPhoto: null,
-    currentWorkplace: "",
-    jobTitle: "",
-    medicalDegreeDocument: null,
-    subspecialty: "",
-    abstractStatus: "",
-    membershipRequest: null,
-  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
 
-  const [uploadedFileName, setUploadedFileName] = useState<string>("");
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        countryDropdownRef.current &&
+        !countryDropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowCountryDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const handlePage1Submit = (values: Partial<typeof formData>) => {
-    setFormData({ ...formData, ...values });
-    setCurrentPage(1);
-  };
+  const handleFormSubmit = async (values: {
+    fullName: string;
+    mobileNumber: string;
+    placeOfWork: string;
+    country: string;
+    email: string;
+    subspecialties: string;
+    otherSubspecialty?: string;
+    abstractTitle: string;
+    abstract: string;
+  }) => {
+    console.log("Form submission started", values);
+    setIsLoading(true);
 
-  const handlePage2Submit = (values: Partial<typeof formData>) => {
-    setFormData({ ...formData, ...values });
-    setCurrentPage(2);
-  };
+    // Simulate delay to show loading state
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const handlePage3Submit = (values: Partial<typeof formData>) => {
-    setFormData({ ...formData, ...values });
-    // Redirect to Google Form or submit endpoint
-    window.location.href = "YOUR_GOOGLE_FORM_LINK_HERE";
-  };
+    // Check if this email has already submitted
+    const submittedEmails = JSON.parse(
+      localStorage.getItem("submittedAbstracts") || "[]"
+    );
 
-  const handleBack = () => {
-    if (currentPage === 2) {
-      setCurrentPage(1);
-    } else if (currentPage === 1) {
-      setCurrentPage(0);
+    if (submittedEmails.includes(values.email)) {
+      console.log("Duplicate submission detected");
+      setIsDuplicate(true);
+      setIsLoading(false);
+      return;
+    }
+
+    // Simulate API call (replace with actual submission logic)
+    try {
+      // TODO: Replace with actual API endpoint
+      // await fetch('/api/submit-abstract', {
+      //   method: 'POST',
+      //   body: JSON.stringify(values)
+      // });
+
+      // Store the email to prevent duplicate submissions
+      submittedEmails.push(values.email);
+      localStorage.setItem(
+        "submittedAbstracts",
+        JSON.stringify(submittedEmails)
+      );
+
+      console.log("Form submitted successfully");
+      setIsSubmitted(true);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("There was an error submitting your abstract. Please try again.");
+      setIsLoading(false);
     }
   };
 
+  // If duplicate submission detected, show warning message
+  if (isDuplicate) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100 text-center">
+            <div className="mb-6">
+              <svg
+                className="w-20 h-20 text-yellow-500 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-3xl font-bold text-[#38738c] mb-4">
+              Already Submitted
+            </h2>
+            <p className="text-xl text-gray-700 mb-4">
+              This email has already been used to submit an abstract.
+            </p>
+            <p className="text-gray-600 mb-8">
+              You cannot submit again with the same account or email. If you
+              believe this is an error, please contact us at{" "}
+              <a
+                href="mailto:info@mocatiscrs.org"
+                className="text-[#38738c] font-semibold hover:underline"
+              >
+                info@mocatiscrs.org
+              </a>
+            </p>
+            <Link
+              href="/abstract"
+              className="inline-block bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300"
+            >
+              Back to Abstract Information
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // If form is submitted, show success message
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100 text-center">
+            <div className="mb-6">
+              <svg
+                className="w-20 h-20 text-green-500 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-3xl font-bold text-[#38738c] mb-4">
+              Submission Successful!
+            </h2>
+            <p className="text-xl text-gray-700 mb-8">
+              Your submission has been received and is under review.
+            </p>
+            <Link
+              href="/abstract"
+              className="inline-block bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300"
+            >
+              Back to Abstract Information
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-16">
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 shadow-2xl text-center">
+            <div className="relative w-24 h-24 mx-auto mb-6">
+              {/* Animated Clock/Spinner */}
+              <svg
+                className="animate-spin w-24 h-24 text-[#38738c]"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              {/* Clock hands overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg
+                  className="w-16 h-16 text-[#94573d]"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold text-[#38738c] mb-2">
+              Submitting Your Abstract...
+            </h3>
+            <p className="text-gray-600">
+              Please wait while we process your submission
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Back to Abstract Info Button */}
       <div className="max-w-4xl mx-auto px-4 mb-8 mt-8">
         <Link
@@ -152,83 +486,177 @@ export default function AbstractForm() {
         </Link>
       </div>
 
-      {/* Multi-Step Form Section */}
+      {/* Single-Page Form Section */}
       <section className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100">
           <h2 className="text-4xl font-bold text-center text-[#38738c] mb-8">
-            ISCRS Abstract Registration Form
+            MOCAT Abstract Submission Form
           </h2>
 
-          {/* Progress Indicator */}
-          <div className="flex items-center justify-center mb-10">
-            <div className="flex items-center space-x-4">
-              <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                  currentPage === 0
-                    ? "bg-[#38738c] text-white scale-110"
-                    : "bg-gray-300 text-gray-600"
-                }`}
-              >
-                1
-              </div>
-              <div
-                className={`w-20 h-1 transition-all ${
-                  currentPage >= 1 ? "bg-[#38738c]" : "bg-gray-300"
-                }`}
-              ></div>
-              <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                  currentPage === 1
-                    ? "bg-[#38738c] text-white scale-110"
-                    : "bg-gray-300 text-gray-600"
-                }`}
-              >
-                2
-              </div>
-              <div
-                className={`w-20 h-1 transition-all ${
-                  currentPage === 2 ? "bg-[#38738c]" : "bg-gray-300"
-                }`}
-              ></div>
-              <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                  currentPage === 2
-                    ? "bg-[#38738c] text-white scale-110"
-                    : "bg-gray-300 text-gray-600"
-                }`}
-              >
-                3
-              </div>
-            </div>
-          </div>
+          <Formik
+            initialValues={{
+              fullName: "",
+              mobileNumber: "",
+              placeOfWork: "",
+              country: "",
+              email: "",
+              subspecialties: "",
+              otherSubspecialty: "",
+              abstractTitle: "",
+              abstract: "",
+            }}
+            validationSchema={formSchema}
+            onSubmit={handleFormSubmit}
+            validateOnChange={true}
+            validateOnBlur={true}
+          >
+            {({ values, errors, submitCount, setFieldValue }) => {
+              const filteredCountries = countries.filter((country) =>
+                country.toLowerCase().includes(countrySearch.toLowerCase())
+              );
 
-          {/* Page 1 Form */}
-          {currentPage === 0 && (
-            <Formik
-              initialValues={{
-                email: formData.email,
-                fullNameEnglish: formData.fullNameEnglish,
-                fullNameArabic: formData.fullNameArabic,
-                age: formData.age,
-                nationality: formData.nationality,
-                nationalityOther: formData.nationalityOther,
-                cityOfResidence: formData.cityOfResidence,
-                phoneNumber: formData.phoneNumber,
-                title: formData.title,
-                subject: formData.subject,
-              }}
-              validationSchema={page1Schema}
-              onSubmit={handlePage1Submit}
-            >
-              {({ values }) => (
+              return (
                 <Form className="space-y-6">
+                  {/* Show validation errors at top ONLY after a failed submit attempt */}
+                  {submitCount > 0 && Object.keys(errors).length > 0 && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                      <h4 className="text-red-800 font-semibold mb-2">
+                        Please fix the following errors before submitting:
+                      </h4>
+                      <ul className="text-red-700 text-sm space-y-1 list-disc list-inside">
+                        {Object.entries(errors).map(([field, error]) => (
+                          <li key={field}>
+                            <strong>
+                              {field.replace(/([A-Z])/g, " $1").trim()}:
+                            </strong>{" "}
+                            {String(error)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Full Name */}
+                  <div>
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <Field
+                      type="text"
+                      name="fullName"
+                      id="fullName"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
+                      placeholder="Enter your full name"
+                    />
+                    <ErrorMessage
+                      name="fullName"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+
+                  {/* Mobile Number */}
+                  <div>
+                    <label
+                      htmlFor="mobileNumber"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Mobile Number <span className="text-red-500">*</span>
+                    </label>
+                    <Field
+                      type="tel"
+                      name="mobileNumber"
+                      id="mobileNumber"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
+                      placeholder="+964 XXX XXX XXXX"
+                    />
+                    <ErrorMessage
+                      name="mobileNumber"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+
+                  {/* Place of Work */}
+                  <div>
+                    <label
+                      htmlFor="placeOfWork"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Place of Work <span className="text-red-500">*</span>
+                    </label>
+                    <Field
+                      type="text"
+                      name="placeOfWork"
+                      id="placeOfWork"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
+                      placeholder="Enter your workplace"
+                    />
+                    <ErrorMessage
+                      name="placeOfWork"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+
+                  {/* Country - Searchable Dropdown */}
+                  <div ref={countryDropdownRef}>
+                    <label
+                      htmlFor="country"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Country <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={values.country || countrySearch}
+                        onChange={(e) => {
+                          setCountrySearch(e.target.value);
+                          setShowCountryDropdown(true);
+                          if (!e.target.value) {
+                            setFieldValue("country", "");
+                          }
+                        }}
+                        onFocus={() => setShowCountryDropdown(true)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
+                        placeholder="Search for your country..."
+                      />
+                      {showCountryDropdown && filteredCountries.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {filteredCountries.map((country) => (
+                            <div
+                              key={country}
+                              onClick={() => {
+                                setFieldValue("country", country);
+                                setCountrySearch(country);
+                                setShowCountryDropdown(false);
+                              }}
+                              className="px-4 py-2 hover:bg-[#38738c] hover:text-white cursor-pointer transition-colors"
+                            >
+                              {country}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <ErrorMessage
+                      name="country"
+                      component="div"
+                      className="text-red-500 text-sm mt-1"
+                    />
+                  </div>
+
                   {/* Email */}
                   <div>
                     <label
                       htmlFor="email"
                       className="block text-sm font-semibold text-gray-700 mb-2"
                     >
-                      Email Address
+                      Email Address <span className="text-red-500">*</span>
                     </label>
                     <Field
                       type="email"
@@ -244,590 +672,156 @@ export default function AbstractForm() {
                     />
                   </div>
 
-                  {/* Full Name English */}
+                  {/* Subspecialties */}
                   <div>
                     <label
-                      htmlFor="fullNameEnglish"
+                      htmlFor="subspecialties"
                       className="block text-sm font-semibold text-gray-700 mb-2"
                     >
-                      Full Name in English
-                    </label>
-                    <Field
-                      type="text"
-                      name="fullNameEnglish"
-                      id="fullNameEnglish"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="John Doe"
-                    />
-                    <ErrorMessage
-                      name="fullNameEnglish"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Full Name Arabic */}
-                  <div>
-                    <label
-                      htmlFor="fullNameArabic"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Your Name in Arabic
-                    </label>
-                    <Field
-                      type="text"
-                      name="fullNameArabic"
-                      id="fullNameArabic"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="اسمك بالعربي"
-                      dir="rtl"
-                    />
-                    <ErrorMessage
-                      name="fullNameArabic"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Age */}
-                  <div>
-                    <label
-                      htmlFor="age"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Age (Date of Birth)
-                    </label>
-                    <Field
-                      type="date"
-                      name="age"
-                      id="age"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                    />
-                    <ErrorMessage
-                      name="age"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Nationality */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Nationality
-                    </label>
-                    <div className="space-y-3">
-                      <label className="flex items-center space-x-3 cursor-pointer">
-                        <Field
-                          type="radio"
-                          name="nationality"
-                          value="Iraqi"
-                          className="w-4 h-4 text-[#38738c] focus:ring-[#38738c]"
-                        />
-                        <span className="text-gray-700">Iraqi</span>
-                      </label>
-                      <label className="flex items-center space-x-3 cursor-pointer">
-                        <Field
-                          type="radio"
-                          name="nationality"
-                          value="Others"
-                          className="w-4 h-4 text-[#38738c] focus:ring-[#38738c]"
-                        />
-                        <span className="text-gray-700">Others</span>
-                      </label>
-                      {values.nationality === "Others" && (
-                        <Field
-                          type="text"
-                          name="nationalityOther"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all mt-2"
-                          placeholder="Please specify your nationality"
-                        />
-                      )}
-                    </div>
-                    <ErrorMessage
-                      name="nationality"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                    <ErrorMessage
-                      name="nationalityOther"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* City of Residence */}
-                  <div>
-                    <label
-                      htmlFor="cityOfResidence"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      City of Residence
+                      Subspecialties <span className="text-red-500">*</span>
                     </label>
                     <Field
                       as="select"
-                      name="cityOfResidence"
-                      id="cityOfResidence"
+                      name="subspecialties"
+                      id="subspecialties"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
                     >
-                      <option value="">Select a governorate</option>
-                      {iraqiGovernorates.map((governorate) => (
-                        <option key={governorate} value={governorate}>
-                          {governorate}
+                      <option value="">Select a subspecialty</option>
+                      {subspecialties.map((subspecialty) => (
+                        <option key={subspecialty} value={subspecialty}>
+                          {subspecialty}
                         </option>
                       ))}
                     </Field>
                     <ErrorMessage
-                      name="cityOfResidence"
+                      name="subspecialties"
                       component="div"
                       className="text-red-500 text-sm mt-1"
                     />
                   </div>
 
-                  {/* Phone Number */}
-                  <div>
-                    <label
-                      htmlFor="phoneNumber"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Phone Number (WhatsApp)
-                    </label>
-                    <Field
-                      type="tel"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="+964 XXX XXX XXXX"
-                    />
-                    <ErrorMessage
-                      name="phoneNumber"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
+                  {/* Other Subspecialty - Only show when "Other" is selected */}
+                  {values.subspecialties === "Other" && (
+                    <div>
+                      <label
+                        htmlFor="otherSubspecialty"
+                        className="block text-sm font-semibold text-gray-700 mb-2"
+                      >
+                        Please specify your subspecialty{" "}
+                        <span className="text-red-500">*</span>
+                      </label>
+                      <Field
+                        type="text"
+                        name="otherSubspecialty"
+                        id="otherSubspecialty"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
+                        placeholder="Enter your subspecialty"
+                      />
+                      <ErrorMessage
+                        name="otherSubspecialty"
+                        component="div"
+                        className="text-red-500 text-sm mt-1"
+                      />
+                    </div>
+                  )}
 
-                  {/* Title */}
+                  {/* Abstract Title */}
                   <div>
                     <label
-                      htmlFor="title"
+                      htmlFor="abstractTitle"
                       className="block text-sm font-semibold text-gray-700 mb-2"
                     >
-                      Title
+                      Abstract Title <span className="text-red-500">*</span>
                     </label>
                     <Field
                       type="text"
-                      name="title"
-                      id="title"
+                      name="abstractTitle"
+                      id="abstractTitle"
                       maxLength={250}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
                       placeholder="Enter abstract title (max 250 characters)"
                     />
                     <div className="flex justify-between items-center mt-1">
                       <ErrorMessage
-                        name="title"
+                        name="abstractTitle"
                         component="div"
                         className="text-red-500 text-sm"
                       />
                       <span className="text-xs text-gray-500">
-                        {values.title?.length || 0}/250
+                        {values.abstractTitle?.length || 0}/250
                       </span>
                     </div>
                   </div>
 
-                  {/* Subject */}
+                  {/* Abstract */}
                   <div>
                     <label
-                      htmlFor="subject"
+                      htmlFor="abstract"
                       className="block text-sm font-semibold text-gray-700 mb-2"
                     >
-                      Subject
+                      Abstract <span className="text-red-500">*</span>
                     </label>
                     <Field
-                      type="text"
-                      name="subject"
-                      id="subject"
-                      maxLength={250}
+                      as="textarea"
+                      name="abstract"
+                      id="abstract"
+                      rows={8}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="Enter abstract subject (max 250 characters)"
+                      placeholder="Enter your abstract (minimum 50 characters)..."
                     />
                     <div className="flex justify-between items-center mt-1">
                       <ErrorMessage
-                        name="subject"
+                        name="abstract"
                         component="div"
                         className="text-red-500 text-sm"
                       />
                       <span className="text-xs text-gray-500">
-                        {values.subject?.length || 0}/250
+                        {values.abstract?.length || 0} characters
                       </span>
                     </div>
                   </div>
 
-                  {/* Navigation Buttons */}
-                  <div className="flex justify-end pt-6">
+                  {/* Submit Button */}
+                  <div className="flex justify-center pt-6">
                     <button
                       type="submit"
-                      className="bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300"
+                      disabled={isLoading}
+                      onClick={() => console.log("Submit button clicked")}
+                      className="bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-12 py-4 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next →
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          )}
-
-          {/* Page 2 Form */}
-          {currentPage === 1 && (
-            <Formik
-              initialValues={{
-                professionalPhoto: formData.professionalPhoto,
-                currentWorkplace: formData.currentWorkplace,
-                jobTitle: formData.jobTitle,
-                medicalDegreeDocument: formData.medicalDegreeDocument,
-                subspecialty: formData.subspecialty,
-              }}
-              validationSchema={page2Schema}
-              onSubmit={handlePage2Submit}
-            >
-              {({ setFieldValue }) => (
-                <Form className="space-y-6">
-                  {/* Professional Photo */}
-                  <div>
-                    <label
-                      htmlFor="professionalPhoto"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Professional Photo
-                    </label>
-                    <input
-                      type="file"
-                      name="professionalPhoto"
-                      id="professionalPhoto"
-                      accept="image/*"
-                      onChange={(event) => {
-                        const file = event.currentTarget.files?.[0];
-                        if (file && file.size <= 10 * 1024 * 1024) {
-                          setFieldValue("professionalPhoto", file);
-                        } else {
-                          alert("File size must be less than 10 MB");
-                        }
-                      }}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                    />
-                    <p className="text-sm text-gray-500 mt-1">
-                      Upload 1 supported file. Max 10 MB.
-                    </p>
-                    <ErrorMessage
-                      name="professionalPhoto"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Current Workplace */}
-                  <div>
-                    <label
-                      htmlFor="currentWorkplace"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Current Workplace / Affiliation
-                    </label>
-                    <Field
-                      type="text"
-                      name="currentWorkplace"
-                      id="currentWorkplace"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="Your current workplace"
-                    />
-                    <ErrorMessage
-                      name="currentWorkplace"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Job Title */}
-                  <div>
-                    <label
-                      htmlFor="jobTitle"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Job Title
-                    </label>
-                    <Field
-                      as="select"
-                      name="jobTitle"
-                      id="jobTitle"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                    >
-                      <option value="">Select your job title</option>
-                      {jobTitles.map((title) => (
-                        <option key={title} value={title}>
-                          {title}
-                        </option>
-                      ))}
-                    </Field>
-                    <ErrorMessage
-                      name="jobTitle"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Medical Degree Document */}
-                  <div>
-                    <label
-                      htmlFor="medicalDegreeDocument"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Medical Degrees or Fellowships Proof Document
-                    </label>
-                    <input
-                      type="file"
-                      name="medicalDegreeDocument"
-                      id="medicalDegreeDocument"
-                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                      onChange={(event) => {
-                        const file = event.currentTarget.files?.[0];
-                        if (file && file.size <= 10 * 1024 * 1024) {
-                          setFieldValue("medicalDegreeDocument", file);
-                        } else {
-                          alert("File size must be less than 10 MB");
-                        }
-                      }}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                    />
-                    <p className="text-sm text-gray-500 mt-1">
-                      Upload 1 supported file. Max 10 MB.
-                    </p>
-                    <ErrorMessage
-                      name="medicalDegreeDocument"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Subspecialty */}
-                  <div>
-                    <label
-                      htmlFor="subspecialty"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Subspecialty (if applicable)
-                    </label>
-                    <Field
-                      type="text"
-                      name="subspecialty"
-                      id="subspecialty"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#38738c] focus:border-transparent transition-all"
-                      placeholder="Your subspecialty"
-                    />
-                    <ErrorMessage
-                      name="subspecialty"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Navigation Buttons */}
-                  <div className="flex justify-between pt-6">
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-all duration-300"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300"
-                    >
-                      Next →
-                    </button>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          )}
-
-          {/* Page 3 Form */}
-          {currentPage === 2 && (
-            <Formik
-              initialValues={{
-                abstractStatus: formData.abstractStatus,
-                membershipRequest: formData.membershipRequest,
-              }}
-              validationSchema={page3Schema}
-              onSubmit={handlePage3Submit}
-            >
-              {({ setFieldValue }) => (
-                <Form className="space-y-6">
-                  {/* Abstract Status */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Abstract Status
-                    </label>
-                    <div className="space-y-3">
-                      <label className="flex items-center space-x-3 cursor-pointer">
-                        <Field
-                          type="radio"
-                          name="abstractStatus"
-                          value="First time"
-                          className="w-4 h-4 text-[#38738c] focus:ring-[#38738c]"
-                        />
-                        <span className="text-gray-700">First time</span>
-                      </label>
-                      <label className="flex items-center space-x-3 cursor-pointer">
-                        <Field
-                          type="radio"
-                          name="abstractStatus"
-                          value="Re-newel"
-                          className="w-4 h-4 text-[#38738c] focus:ring-[#38738c]"
-                        />
-                        <span className="text-gray-700">Re-newel</span>
-                      </label>
-                    </div>
-                    <ErrorMessage
-                      name="abstractStatus"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Membership Request */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Membership Request Form
-                    </label>
-                    <p className="text-sm text-gray-600 mb-4">
-                      Download, fill then upload
-                    </p>
-
-                    {/* File Upload Section */}
-                    <div className="relative">
-                      {!uploadedFileName ? (
-                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                          <input
-                            type="file"
-                            name="membershipRequest"
-                            id="membershipRequest"
-                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                            onChange={(event) => {
-                              const file = event.currentTarget.files?.[0];
-                              if (file && file.size <= 10 * 1024 * 1024) {
-                                setFieldValue("membershipRequest", file);
-                                setUploadedFileName(file.name);
-                              } else {
-                                alert("File size must be less than 10 MB");
-                              }
-                            }}
-                            className="hidden"
-                          />
-                          <label
-                            htmlFor="membershipRequest"
-                            className="cursor-pointer inline-block"
+                      {isLoading ? (
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="animate-spin h-5 w-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
                           >
-                            <div className="flex flex-col items-center">
-                              <svg
-                                className="w-12 h-12 text-gray-400 mb-3"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                                />
-                              </svg>
-                              <span className="text-[#38738c] font-semibold hover:text-[#94573d] transition-colors">
-                                Click to upload file
-                              </span>
-                              <span className="text-xs text-gray-500 mt-2">
-                                Upload 1 supported file. Max 10 MB.
-                              </span>
-                            </div>
-                          </label>
-                        </div>
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Submitting...
+                        </span>
                       ) : (
-                        <div className="border-2 border-[#38738c] rounded-lg p-4 bg-[#38738c]/5">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <svg
-                                className="w-8 h-8 text-[#38738c]"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                />
-                              </svg>
-                              <div>
-                                <p className="text-sm font-semibold text-gray-700">
-                                  {uploadedFileName}
-                                </p>
-                                <p className="text-xs text-gray-500">
-                                  File uploaded successfully
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setFieldValue("membershipRequest", null);
-                                setUploadedFileName("");
-                              }}
-                              className="text-red-500 hover:text-red-700 transition-colors"
-                            >
-                              <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                        "Submit Abstract"
                       )}
-                    </div>
-                    <ErrorMessage
-                      name="membershipRequest"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-
-                  {/* Navigation Buttons */}
-                  <div className="flex justify-between pt-6">
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-400 transition-all duration-300"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      type="submit"
-                      className="bg-gradient-to-r from-[#38738c] to-[#94573d] text-white px-8 py-3 rounded-lg font-semibold hover:shadow-xl hover:scale-105 transform transition-all duration-300"
-                    >
-                      Submit Abstract
                     </button>
                   </div>
                 </Form>
-              )}
-            </Formik>
-          )}
+              );
+            }}
+          </Formik>
         </div>
       </section>
     </div>

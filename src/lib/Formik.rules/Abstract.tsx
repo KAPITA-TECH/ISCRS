@@ -8,10 +8,10 @@ export default function AbstractSubmission() {
       <section className="relative bg-gradient-to-r from-[#8ccbe5] to-[#b56c4d] text-[#2e5e73] py-30 px-4 overflow-hidden">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
-            ISRC Abstract Submission
+            MOCAT Abstract Submission
           </h1>
           <p className="text-xl md:text-2xl text-[#2e5e73] max-w-3xl mx-auto leading-relaxed mb-8">
-            Submit your abstract to be part of the ISRC.
+            Submit your abstract to be part of MOCAT.
           </p>
           <Link
             href="/abstract/submit"
